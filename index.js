@@ -96,9 +96,9 @@ async function run() {
 
     app.post('/allblog', veryfiToken, async (req, res) => {
       const blog = req.body
-      const blogemail = req.body.email
+      const blogemail = req.body.useremail
       const decodedemail = req.user.email
-      if (blogemail == decodedemail) return res.status(403).send({ message: 'unauthroize' })
+      if (blogemail !== decodedemail) return res.status(403).send({ message: 'unauthroize' })
 
       const result = await allblogCollection.insertOne(blog)
       res.send(result)
